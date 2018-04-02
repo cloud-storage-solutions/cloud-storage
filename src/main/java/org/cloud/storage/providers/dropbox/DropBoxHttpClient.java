@@ -1,0 +1,45 @@
+package org.cloud.storage.providers.dropbox;
+
+import static org.cloud.storage.commons.http.HeaderConstants.APPLICATION_OCTET_STREAM;
+import static org.cloud.storage.commons.http.HeaderConstants.DROPBOX_API;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.cloud.storage.services.RequestFactory;
+
+import com.google.api.client.http.FileContent;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpResponse;
+
+public class DropBoxHttpClient implements CloudProvider {
+	/*
+	 * Do not use this to upload a file larger than 150 MB. Instead, create an
+	 * upload session with upload_session/start.
+	 */
+	// expected 200
+	@Override
+	public HttpResponse upload(final File file, final String destination) throws IOException {
+		final HttpRequest httpRequest = new RequestFactory().createPostRequest(
+				"https://content.dropboxapi.com/2/files/upload", new FileContent(APPLICATION_OCTET_STREAM, file));
+		httpRequest.getHeaders().set(DROPBOX_API,
+				"{\"path\": \"/" + destination + "\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}");
+		return httpRequest.execute();
+	}
+
+	@Override
+	public HttpResponse download() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	// expected 200
+	// TODO: autoclosable response
+	@Override
+	public HttpResponse getSpaceQuota() throws IOException {
+		final HttpRequest httpRequest = new RequestFactory()
+				.createPostRequest("https://api.dropboxapi.com/2/users/get_space_usage");
+		return httpRequest.execute();
+	}
+
+}
