@@ -1,11 +1,11 @@
 package org.cloud.storage.providers.dropbox;
 
-import static org.cloud.storage.commons.http.HeaderConstants.APPLICATION_OCTET_STREAM;
 import static org.cloud.storage.commons.http.HeaderConstants.DROPBOX_API;
 
 import java.io.File;
 import java.io.IOException;
 
+import org.cloud.storage.commons.http.HeaderConstants;
 import org.cloud.storage.services.RequestFactory;
 
 import com.google.api.client.http.FileContent;
@@ -21,7 +21,7 @@ public class DropBoxHttpClient implements CloudProvider {
 	@Override
 	public HttpResponse upload(final File file, final String destination) throws IOException {
 		final HttpRequest httpRequest = new RequestFactory().createPostRequest(
-				"https://content.dropboxapi.com/2/files/upload", new FileContent(APPLICATION_OCTET_STREAM, file));
+				"https://content.dropboxapi.com/2/files/upload", new FileContent("application/octet-stream", file));
 		httpRequest.getHeaders().set(DROPBOX_API,
 				"{\"path\": \"/" + destination + "\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}");
 		return httpRequest.execute();
