@@ -9,5 +9,5 @@ public interface CloudProvider {
 
 	HttpResponse download();
 
-	String getSpaceQuota() throws Exception;
+	HttpResponse getSpaceQuota() throws Exception;
 }
