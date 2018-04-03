@@ -1,4 +1,4 @@
-package org.cloud.storage.services;
+package org.cloud.storage.commons.http.factory;
 
 import java.io.IOException;
 
@@ -30,13 +30,8 @@ public class RequestFactory {
 	}
 
 	private HttpRequestFactory createAuthorizedRequestFactory(final HttpTransport transport) {
-		return transport.createRequestFactory(new HttpRequestInitializer() {
-			@Override
-			public void initialize(HttpRequest request) throws IOException {
-				request.getHeaders()
-						.setAuthorization("Bearer mOr7MpfnLxAAAAAAAAAAHnno4DFivMbdVKyzgislw3Fx-kkH31auhhAsfRRasdPv");
-			}
-		});
+		return transport.createRequestFactory(request -> request.getHeaders()
+            .setAuthorization("Bearer j5jRToJdvHAAAAAAAABmwShwRVQJ3Fe8HIGqqAsqHFN9Uadp4WecU3WC2IBAva2Z"));
 	}
 
 }
