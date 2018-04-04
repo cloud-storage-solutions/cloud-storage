@@ -17,7 +17,7 @@ public class CloudProviderService {
 		this.cloudProvider = cloudProvider;
 	}
 
-	public void upload(final File file, String destination) throws Exception {
+	public void upload(final File file, final String destination) throws Exception {
 		cloudProvider.upload(file, destination);
 	}
 

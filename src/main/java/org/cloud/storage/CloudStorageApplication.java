@@ -1,7 +1,5 @@
 package org.cloud.storage;
 
-import java.io.File;
-
 import org.cloud.storage.providers.dropbox.DropBoxHttpClient;
 import org.cloud.storage.services.CloudProviderService;
 import org.springframework.boot.SpringApplication;
@@ -16,9 +14,6 @@ public class CloudStorageApplication {
 		try {
 			System.out.println(cloudProviderService.getSpaceQuota());
 
-			File localFile = new File("/home/nikola/Desktop/test.txt");
-			String destination = "Homework/math/test.txt";
-			cloudProviderService.upload(localFile, destination);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

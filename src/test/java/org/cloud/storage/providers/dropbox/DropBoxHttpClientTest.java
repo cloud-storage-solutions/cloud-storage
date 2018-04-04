@@ -1,65 +1,52 @@
 package org.cloud.storage.providers.dropbox;
 
-import com.google.api.client.http.HttpRequest;
-import com.google.api.client.http.HttpResponse;
-import org.cloud.storage.commons.http.factory.RequestFactory;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import java.io.IOException;
-
+import static org.cloud.storage.providers.dropbox.DropBoxEndpointConstants.SPACE_QUOTA_ENDPOINT;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-//@RunWith(MockitoJUnitRunner.class)
-class DropBoxHttpClientTest {
-   private static final String RESPONSE_BODY = "{\n" +
-         "    \"used\": 314159265,\n" +
-         "    \"allocation\": {\n" +
-         "        \".tag\": \"individual\",\n" +
-         "        \"allocated\": 10000000000\n" +
-         "    }\n" +
-         "}";
+import java.io.IOException;
 
-   private DropBoxHttpClient dropBoxHttpClient;
+import org.cloud.storage.commons.http.HttpRequestWrapper;
+import org.cloud.storage.commons.http.HttpResponseWrapper;
+import org.cloud.storage.commons.http.factory.RequestFactory;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
-   @Mock
-   private RequestFactory requestFactory;
+@RunWith(MockitoJUnitRunner.class)
+public class DropBoxHttpClientTest {
+	private static final String RESPONSE_BODY_JSON = "{response-body-json-placeholder}";
 
-   @Mock
-   private HttpRequest httpRequest;
+	private DropBoxHttpClient dropBoxHttpClient;
 
-   @Mock
-   private HttpResponse httpResponse;
+	@Mock
+	private RequestFactory requestFactoryMock;
 
-   @BeforeEach
-   public void setup() throws Exception {
-      MockitoAnnotations.initMocks(this);
-      when(httpResponse.parseAsString()).thenReturn(RESPONSE_BODY);
-      when(httpRequest.execute()).thenReturn(httpResponse);
-      when(requestFactory.createPostRequest(anyString())).thenReturn(httpRequest);
-      dropBoxHttpClient = new DropBoxHttpClient(requestFactory);
-   }
+	@Mock
+	private HttpRequestWrapper httpRequestWrapperMock;
 
-   @Test
-   void upload() {
-      assertThat(false, Matchers.allOf());
-   }
+	@Mock
+	private HttpResponseWrapper httpResponseWrapperMock;
 
-   @Test
-   void download() {
-   }
+	@Before
+	public void setup() throws Exception {
+		dropBoxHttpClient = spy(new DropBoxHttpClient(requestFactoryMock));
+		when(requestFactoryMock.createPostRequest(anyString())).thenReturn(httpRequestWrapperMock);
+		doReturn(httpResponseWrapperMock).when(dropBoxHttpClient).executeRequest(httpRequestWrapperMock);
+		when(httpResponseWrapperMock.parseAsString()).thenReturn(RESPONSE_BODY_JSON);
+	}
 
-   @Test
-   void getSpaceQuota() throws IOException {
-      assertThat(dropBoxHttpClient.getSpaceQuota(), equalTo("10GB"));
-   }
+	@Test
+	public void testGetSpaceQuota() throws IOException {
+		assertThat(dropBoxHttpClient.getSpaceQuota(), equalTo(RESPONSE_BODY_JSON));
+		verify(requestFactoryMock).createPostRequest(SPACE_QUOTA_ENDPOINT);
+	}
 
 }

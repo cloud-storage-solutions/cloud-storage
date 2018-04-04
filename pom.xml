@@ -9,7 +9,6 @@
 	<packaging>jar</packaging>
 
 	<name>cloud-storage</name>
-	<description>Demo project for Spring Boot</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -54,12 +53,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>1.8.4</version>
@@ -75,6 +68,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>
