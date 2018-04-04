@@ -22,7 +22,7 @@ public class CloudProviderService {
 	}
 
 	public String getSpaceQuota() throws JsonSyntaxException, Exception {
-		long spaceQuota = new SpaceQuotaHttpResponseParser(cloudProvider.getSpaceQuota())
+		long spaceQuota = new SpaceQuotaHttpResponseParser(cloudProvider.getSpaceQuota().parseAsString())
 				.getParsedSpaceQuoata(cloudProvider.getClass());
 		return byteCountToDisplaySize(spaceQuota);
 	}

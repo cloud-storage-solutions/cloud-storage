@@ -2,10 +2,12 @@ package org.cloud.storage.providers;
 
 import java.io.File;
 
+import org.cloud.storage.commons.http.HttpResponseWrapper;
+
 public interface CloudProvider {
-	void upload(final File file, final String destination) throws Exception;
+	HttpResponseWrapper upload(final File file, final String destination) throws Exception;
 
-	void download();
+	HttpResponseWrapper download(final String destination) throws Exception;
 
-	String getSpaceQuota() throws Exception;
+	HttpResponseWrapper getSpaceQuota() throws Exception;
 }

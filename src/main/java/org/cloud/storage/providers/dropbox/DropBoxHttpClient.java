@@ -1,6 +1,8 @@
 package org.cloud.storage.providers.dropbox;
 
+import static org.cloud.storage.commons.http.HeaderConstants.APPLICATION_OCTET_STREAM;
 import static org.cloud.storage.commons.http.HeaderConstants.DROPBOX_API;
+import static org.cloud.storage.providers.dropbox.DropBoxEndpointConstants.DOWNLOAD_ENDPOINT;
 import static org.cloud.storage.providers.dropbox.DropBoxEndpointConstants.SPACE_QUOTA_ENDPOINT;
 import static org.cloud.storage.providers.dropbox.DropBoxEndpointConstants.UPLOAD_ENDPOINT;
 
@@ -33,25 +35,31 @@ public class DropBoxHttpClient implements CloudProvider {
 	 */
 	// expected 200
 	@Override
-	public void upload(final File file, final String destination) throws IOException {
+	public HttpResponseWrapper upload(final File file, final String destination) throws IOException {
 		final HttpRequestWrapper httpRequestWrapper = requestFactory.createPostRequest(UPLOAD_ENDPOINT,
-				new FileContent("application/octet-stream", file));
+				createFileContent(file));
 		httpRequestWrapper.getHeaders().set(DROPBOX_API,
 				"{\"path\": \"/" + destination + "\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}");
-		executeRequest(httpRequestWrapper);
+		return executeRequest(httpRequestWrapper);
+	}
+
+	protected FileContent createFileContent(final File file) {
+		return new FileContent(APPLICATION_OCTET_STREAM, file);
 	}
 
 	@Override
-	public void download() {
-		// TODO Auto-generated method stub
+	public HttpResponseWrapper download(final String destination) throws IOException {
+		final HttpRequestWrapper httpRequestWrapper = requestFactory.createPostRequest(DOWNLOAD_ENDPOINT);
+		httpRequestWrapper.getHeaders().set(DROPBOX_API, "{\"path\": \"" + destination + "\"}");
+		return executeRequest(httpRequestWrapper);
 	}
 
 	// expected 200
 	// TODO: autoclosable response
 	@Override
-	public String getSpaceQuota() throws IOException {
+	public HttpResponseWrapper getSpaceQuota() throws IOException {
 		final HttpRequestWrapper httpRequestWrapper = requestFactory.createPostRequest(SPACE_QUOTA_ENDPOINT);
-		return executeRequest(httpRequestWrapper).parseAsString();
+		return executeRequest(httpRequestWrapper);
 	}
 
 	protected HttpResponseWrapper executeRequest(final HttpRequestWrapper httpRequestWrapper) throws IOException {
