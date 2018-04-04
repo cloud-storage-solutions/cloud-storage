@@ -1,5 +1,7 @@
 package org.cloud.storage.commons.http;
 
+import static org.springframework.util.Assert.notNull;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -16,6 +18,7 @@ public class HttpResponseWrapper {
 	private final HttpResponse httpResponse;
 
 	public HttpResponseWrapper(final HttpResponse httpResponse) {
+		notNull(httpResponse, "HttpResponse param is null");
 		this.httpResponse = httpResponse;
 	}
 
