@@ -12,6 +12,4 @@ public class HttpResponseWrapperTest {
 		httpResponse = null;
 		new HttpResponseWrapper(httpResponse);
 	}
-
-	// TODO: test successful path
 }
