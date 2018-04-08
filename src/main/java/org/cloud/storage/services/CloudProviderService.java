@@ -8,8 +8,6 @@ import java.io.IOException;
 import org.cloud.storage.commons.parsers.SpaceQuotaParser;
 import org.cloud.storage.providers.HttpClientCloudProvider;
 
-import com.google.gson.JsonSyntaxException;
-
 public class CloudProviderService {
 
 	private final HttpClientCloudProvider cloudProvider;
@@ -18,18 +16,17 @@ public class CloudProviderService {
 		this.cloudProvider = cloudProvider;
 	}
 
-	public void upload(final File file, final String destination) throws Exception {
+	public void upload(final File file, final String destination) throws IOException {
 		cloudProvider.upload(file, destination);
 	}
 
-	public String getSpaceQuota() throws JsonSyntaxException, Exception {
-		long spaceQuota = createSpaceQuotaHttpResponseParser().parseProviderSpaceQuoata(cloudProvider.getClass());
+	public String getSpaceQuota() throws IOException {
+		long spaceQuota = createSpaceQuotaParser().parseProviderSpaceQuoata(cloudProvider.getClass());
 		return byteCountToDisplaySize(spaceQuota);
 	}
 
-	protected SpaceQuotaParser createSpaceQuotaHttpResponseParser() throws IOException, Exception {
+	protected SpaceQuotaParser createSpaceQuotaParser() throws IOException {
 		return new SpaceQuotaParser(cloudProvider.getSpaceQuota().parseAsString());
-
 	}
 
 }

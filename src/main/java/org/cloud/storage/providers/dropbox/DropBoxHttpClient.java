@@ -43,10 +43,6 @@ public class DropBoxHttpClient implements HttpClientCloudProvider {
 		return executeRequest(httpRequestWrapper);
 	}
 
-	protected FileContent createFileContent(final File file) {
-		return new FileContent(APPLICATION_OCTET_STREAM, file);
-	}
-
 	@Override
 	public HttpResponseWrapper download(final String destination) throws IOException {
 		final HttpRequestWrapper httpRequestWrapper = requestFactory.createPostRequest(DOWNLOAD_ENDPOINT);
@@ -60,6 +56,10 @@ public class DropBoxHttpClient implements HttpClientCloudProvider {
 	public HttpResponseWrapper getSpaceQuota() throws IOException {
 		final HttpRequestWrapper httpRequestWrapper = requestFactory.createPostRequest(SPACE_QUOTA_ENDPOINT);
 		return executeRequest(httpRequestWrapper);
+	}
+
+	protected FileContent createFileContent(final File file) {
+		return new FileContent(APPLICATION_OCTET_STREAM, file);
 	}
 
 	protected HttpResponseWrapper executeRequest(final HttpRequestWrapper httpRequestWrapper) throws IOException {

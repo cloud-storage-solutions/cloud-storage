@@ -3,6 +3,7 @@ package org.cloud.storage.services;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -19,7 +20,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DropBoxCloudProviderServiceTest {
-	private static final long TEN_GIGABYTES_IN_BYTES = 10000000000L;
 	private static final String DESTINATION = "destination";
 	private static final File FILE = new File(DESTINATION);
 
@@ -29,11 +29,13 @@ public class DropBoxCloudProviderServiceTest {
 	private DropBoxHttpClient dropBoxHttpClientMock;
 
 	@Mock
-	private SpaceQuotaParser spaceQuotaParser;
+	private SpaceQuotaParser spaceQuotaParserMock;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		cloudProviderService = spy(new CloudProviderService(dropBoxHttpClientMock));
+
+		doReturn(spaceQuotaParserMock).when(cloudProviderService).createSpaceQuotaParser();
 	}
 
 	@Test
@@ -43,9 +45,25 @@ public class DropBoxCloudProviderServiceTest {
 	}
 
 	@Test
-	public void testGetSpaceQuoataSuccessful() throws Exception, Exception {
-		when(spaceQuotaParser.parseProviderSpaceQuoata(DropBoxHttpClient.class)).thenReturn(TEN_GIGABYTES_IN_BYTES);
+	public void testGetSpaceInKiloBytes() throws Exception {
+		when(spaceQuotaParserMock.parseProviderSpaceQuoata(dropBoxHttpClientMock.getClass())).thenReturn(1024L);
 
-		assertThat(spaceQuotaParser.parseProviderSpaceQuoata(DropBoxHttpClient.class), equalTo(TEN_GIGABYTES_IN_BYTES));
+		assertThat(cloudProviderService.getSpaceQuota(), equalTo("1 KB"));
+	}
+
+	@Test
+	public void testGetSpaceInMegaBytes() throws Exception {
+		when(spaceQuotaParserMock.parseProviderSpaceQuoata(dropBoxHttpClientMock.getClass()))
+				.thenReturn((long) (1024 * 1024));
+
+		assertThat(cloudProviderService.getSpaceQuota(), equalTo("1 MB"));
+	}
+
+	@Test
+	public void testGetSpaceInGigaBytes() throws Exception {
+		when(spaceQuotaParserMock.parseProviderSpaceQuoata(dropBoxHttpClientMock.getClass()))
+				.thenReturn((long) (1024 * 1024 * 1024));
+
+		assertThat(cloudProviderService.getSpaceQuota(), equalTo("1 GB"));
 	}
 }
