@@ -52,7 +52,7 @@ public class DropBoxHttpClientTest {
 	private HttpResponseWrapper httpResponseWrapperMock;
 
 	@Mock
-	private HttpHeaders httpHeaders;
+	private HttpHeaders httpHeadesMock;
 
 	@Captor
 	private ArgumentCaptor<File> fileArgumentCaptor;
@@ -62,8 +62,8 @@ public class DropBoxHttpClientTest {
 		dropBoxHttpClient = spy(new DropBoxHttpClient(requestFactoryMock));
 
 		when(requestFactoryMock.createPostRequest(anyString())).thenReturn(httpRequestWrapperMock);
-		when(httpHeaders.set(anyString(), anyString())).thenReturn(httpHeaders);
-		when(httpRequestWrapperMock.getHeaders()).thenReturn(httpHeaders);
+		when(httpHeadesMock.set(anyString(), anyString())).thenReturn(httpHeadesMock);
+		when(httpRequestWrapperMock.getHeaders()).thenReturn(httpHeadesMock);
 		doReturn(httpResponseWrapperMock).when(dropBoxHttpClient).executeRequest(httpRequestWrapperMock);
 	}
 
@@ -76,7 +76,7 @@ public class DropBoxHttpClientTest {
 
 		dropBoxHttpClient.upload(FILE, FILE_DESTINATION);
 
-		verify(httpHeaders).set(DROPBOX_API, UPLOAD_HEADER_VALUE);
+		verify(httpHeadesMock).set(DROPBOX_API, UPLOAD_HEADER_VALUE);
 		assertThat(fileArgumentCaptor.getValue(), equalTo(FILE));
 	}
 
@@ -84,7 +84,7 @@ public class DropBoxHttpClientTest {
 	public void testDownload() throws Exception {
 		dropBoxHttpClient.download(FILE_DESTINATION);
 
-		verify(httpHeaders).set(DROPBOX_API, DOWNLOAD_HEADER_VALUE);
+		verify(httpHeadesMock).set(DROPBOX_API, DOWNLOAD_HEADER_VALUE);
 	}
 
 	@Test

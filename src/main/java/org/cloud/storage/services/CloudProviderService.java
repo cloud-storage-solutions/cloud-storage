@@ -3,6 +3,7 @@ package org.cloud.storage.services;
 import static org.apache.commons.io.FileUtils.byteCountToDisplaySize;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.cloud.storage.commons.parsers.SpaceQuotaHttpResponseParser;
 import org.cloud.storage.providers.CloudProvider;
@@ -22,9 +23,13 @@ public class CloudProviderService {
 	}
 
 	public String getSpaceQuota() throws JsonSyntaxException, Exception {
-		long spaceQuota = new SpaceQuotaHttpResponseParser(cloudProvider.getSpaceQuota().parseAsString())
-				.getParsedSpaceQuoata(cloudProvider.getClass());
+		long spaceQuota = createSpaceQuotaHttpResponseParser().parseProviderSpaceQuoata(cloudProvider.getClass());
 		return byteCountToDisplaySize(spaceQuota);
+	}
+
+	protected SpaceQuotaHttpResponseParser createSpaceQuotaHttpResponseParser() throws IOException, Exception {
+		return new SpaceQuotaHttpResponseParser(cloudProvider.getSpaceQuota().parseAsString());
+
 	}
 
 }

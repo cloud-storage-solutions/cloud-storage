@@ -20,7 +20,7 @@ public class SpaceQuotaHttpResponseParser {
 		spaceQuotaParsers.put(DropBoxHttpClient.class, dropBoxSpaceQuoataJsonElement);
 	}
 
-	public long getParsedSpaceQuoata(final Class<? extends CloudProvider> provider) {
+	public long parseProviderSpaceQuoata(Class<? extends CloudProvider> provider) {
 		return spaceQuotaParsers.get(provider).getAsLong();
 	}
 }

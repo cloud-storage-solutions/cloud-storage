@@ -21,6 +21,7 @@ import com.google.api.client.http.HttpUnsuccessfulResponseHandler;
 import com.google.api.client.util.ObjectParser;
 import com.google.api.client.util.Sleeper;
 
+@SuppressWarnings("deprecation")
 public class HttpRequestWrapper {
 	private final HttpRequest httpRequest;
 
