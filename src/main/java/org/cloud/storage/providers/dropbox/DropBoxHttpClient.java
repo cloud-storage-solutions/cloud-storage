@@ -1,22 +1,22 @@
 package org.cloud.storage.providers.dropbox;
 
-import static org.cloud.storage.commons.http.HeaderConstants.APPLICATION_OCTET_STREAM;
-import static org.cloud.storage.commons.http.HeaderConstants.DROPBOX_API;
-import static org.cloud.storage.providers.dropbox.DropBoxEndpointConstants.DOWNLOAD_ENDPOINT;
-import static org.cloud.storage.providers.dropbox.DropBoxEndpointConstants.SPACE_QUOTA_ENDPOINT;
-import static org.cloud.storage.providers.dropbox.DropBoxEndpointConstants.UPLOAD_ENDPOINT;
+import static org.cloud.storage.providers.dropbox.constants.DropBoxEndpointConstants.DOWNLOAD_ENDPOINT;
+import static org.cloud.storage.providers.dropbox.constants.DropBoxEndpointConstants.SPACE_QUOTA_ENDPOINT;
+import static org.cloud.storage.providers.dropbox.constants.DropBoxEndpointConstants.UPLOAD_ENDPOINT;
+import static org.cloud.storage.providers.dropbox.constants.DropBoxHeaderConstants.APPLICATION_OCTET_STREAM;
+import static org.cloud.storage.providers.dropbox.constants.DropBoxHeaderConstants.DROPBOX_API;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.cloud.storage.commons.http.HttpRequestWrapper;
-import org.cloud.storage.commons.http.HttpResponseWrapper;
-import org.cloud.storage.commons.http.factory.RequestFactory;
-import org.cloud.storage.providers.CloudProvider;
+import org.cloud.storage.commons.factories.RequestFactory;
+import org.cloud.storage.commons.wrappers.HttpRequestWrapper;
+import org.cloud.storage.commons.wrappers.HttpResponseWrapper;
+import org.cloud.storage.providers.HttpClientCloudProvider;
 
 import com.google.api.client.http.FileContent;
 
-public class DropBoxHttpClient implements CloudProvider {
+public class DropBoxHttpClient implements HttpClientCloudProvider {
 
 	private final RequestFactory requestFactory;
 

@@ -1,8 +1,8 @@
 package org.cloud.storage.providers.dropbox;
 
-import static org.cloud.storage.commons.http.HeaderConstants.APPLICATION_OCTET_STREAM;
-import static org.cloud.storage.commons.http.HeaderConstants.DROPBOX_API;
-import static org.cloud.storage.providers.dropbox.DropBoxEndpointConstants.SPACE_QUOTA_ENDPOINT;
+import static org.cloud.storage.providers.dropbox.constants.DropBoxEndpointConstants.SPACE_QUOTA_ENDPOINT;
+import static org.cloud.storage.providers.dropbox.constants.DropBoxHeaderConstants.APPLICATION_OCTET_STREAM;
+import static org.cloud.storage.providers.dropbox.constants.DropBoxHeaderConstants.DROPBOX_API;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -14,9 +14,9 @@ import static org.mockito.Mockito.when;
 
 import java.io.File;
 
-import org.cloud.storage.commons.http.HttpRequestWrapper;
-import org.cloud.storage.commons.http.HttpResponseWrapper;
-import org.cloud.storage.commons.http.factory.RequestFactory;
+import org.cloud.storage.commons.factories.RequestFactory;
+import org.cloud.storage.commons.wrappers.HttpRequestWrapper;
+import org.cloud.storage.commons.wrappers.HttpResponseWrapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -93,5 +93,4 @@ public class DropBoxHttpClientTest {
 
 		verify(requestFactoryMock).createPostRequest(SPACE_QUOTA_ENDPOINT);
 	}
-
 }

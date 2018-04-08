@@ -1,8 +1,8 @@
-package org.cloud.storage.commons.http.factory;
+package org.cloud.storage.commons.factories;
 
 import java.io.IOException;
 
-import org.cloud.storage.commons.http.HttpRequestWrapper;
+import org.cloud.storage.commons.wrappers.HttpRequestWrapper;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpContent;

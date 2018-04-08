@@ -1,4 +1,4 @@
-package org.cloud.storage.providers.dropbox;
+package org.cloud.storage.providers.dropbox.constants;
 
 public final class DropBoxEndpointConstants {
 	public static final String UPLOAD_ENDPOINT = "https://content.dropboxapi.com/2/files/upload";

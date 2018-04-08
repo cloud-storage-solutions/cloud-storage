@@ -5,16 +5,16 @@ import static org.apache.commons.io.FileUtils.byteCountToDisplaySize;
 import java.io.File;
 import java.io.IOException;
 
-import org.cloud.storage.commons.parsers.SpaceQuotaHttpResponseParser;
-import org.cloud.storage.providers.CloudProvider;
+import org.cloud.storage.commons.parsers.SpaceQuotaParser;
+import org.cloud.storage.providers.HttpClientCloudProvider;
 
 import com.google.gson.JsonSyntaxException;
 
 public class CloudProviderService {
 
-	private final CloudProvider cloudProvider;
+	private final HttpClientCloudProvider cloudProvider;
 
-	public CloudProviderService(final CloudProvider cloudProvider) {
+	public CloudProviderService(final HttpClientCloudProvider cloudProvider) {
 		this.cloudProvider = cloudProvider;
 	}
 
@@ -27,8 +27,8 @@ public class CloudProviderService {
 		return byteCountToDisplaySize(spaceQuota);
 	}
 
-	protected SpaceQuotaHttpResponseParser createSpaceQuotaHttpResponseParser() throws IOException, Exception {
-		return new SpaceQuotaHttpResponseParser(cloudProvider.getSpaceQuota().parseAsString());
+	protected SpaceQuotaParser createSpaceQuotaHttpResponseParser() throws IOException, Exception {
+		return new SpaceQuotaParser(cloudProvider.getSpaceQuota().parseAsString());
 
 	}
 

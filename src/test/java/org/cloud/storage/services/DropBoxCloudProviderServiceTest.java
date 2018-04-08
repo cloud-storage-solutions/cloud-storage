@@ -9,7 +9,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.File;
 
-import org.cloud.storage.commons.parsers.SpaceQuotaHttpResponseParser;
+import org.cloud.storage.commons.parsers.SpaceQuotaParser;
 import org.cloud.storage.providers.dropbox.DropBoxHttpClient;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +29,7 @@ public class DropBoxCloudProviderServiceTest {
 	private DropBoxHttpClient dropBoxHttpClientMock;
 
 	@Mock
-	private SpaceQuotaHttpResponseParser spaceQuotaHttpResponseParser;
+	private SpaceQuotaParser spaceQuotaParser;
 
 	@Before
 	public void setUp() {
@@ -44,10 +44,8 @@ public class DropBoxCloudProviderServiceTest {
 
 	@Test
 	public void testGetSpaceQuoataSuccessful() throws Exception, Exception {
-		when(spaceQuotaHttpResponseParser.parseProviderSpaceQuoata(DropBoxHttpClient.class))
-				.thenReturn(TEN_GIGABYTES_IN_BYTES);
+		when(spaceQuotaParser.parseProviderSpaceQuoata(DropBoxHttpClient.class)).thenReturn(TEN_GIGABYTES_IN_BYTES);
 
-		assertThat(spaceQuotaHttpResponseParser.parseProviderSpaceQuoata(DropBoxHttpClient.class),
-				equalTo(TEN_GIGABYTES_IN_BYTES));
+		assertThat(spaceQuotaParser.parseProviderSpaceQuoata(DropBoxHttpClient.class), equalTo(TEN_GIGABYTES_IN_BYTES));
 	}
 }
