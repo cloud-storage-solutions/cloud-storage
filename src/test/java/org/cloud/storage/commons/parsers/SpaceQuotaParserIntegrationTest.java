@@ -7,7 +7,7 @@ import org.cloud.storage.providers.dropbox.DropBoxHttpClient;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SpaceQuotaParserTest {
+public class SpaceQuotaParserIntegrationTest {
 	private static final long SPACE_QUOTA_IN_BYTES = 1024L;
 	private static final String SPACE_QUOTA_JSON = "{ \"allocation\": { \"allocated\": 1024} }";
 

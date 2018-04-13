@@ -11,14 +11,14 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.apache.ApacheHttpTransport;
 
 public class RequestFactory {
-	private final HttpRequestFactory requestFactory;
+	private final HttpRequestFactory httpRequestFactory;
 
 	public RequestFactory() {
-		requestFactory = createAuthorizedRequestFactory(new ApacheHttpTransport());
+		httpRequestFactory = createAuthorizedRequestFactory(new ApacheHttpTransport());
 	}
 
 	public HttpRequestWrapper createGetRequest(final String url) throws IOException {
-		return new HttpRequestWrapper(requestFactory.buildGetRequest(new GenericUrl(url)));
+		return new HttpRequestWrapper(httpRequestFactory.buildGetRequest(new GenericUrl(url)));
 	}
 
 	public HttpRequestWrapper createPostRequest(final String url) throws IOException {
@@ -26,10 +26,11 @@ public class RequestFactory {
 	}
 
 	public HttpRequestWrapper createPostRequest(final String url, final HttpContent httpContent) throws IOException {
-		return new HttpRequestWrapper(requestFactory.buildPostRequest(new GenericUrl(url), httpContent));
+		return new HttpRequestWrapper(httpRequestFactory.buildPostRequest(new GenericUrl(url), httpContent));
 	}
 
-	private HttpRequestFactory createAuthorizedRequestFactory(final HttpTransport transport) {
+	// TODO missing unit test
+	protected HttpRequestFactory createAuthorizedRequestFactory(final HttpTransport transport) {
 		return transport.createRequestFactory(request -> request.getHeaders()
 				.setAuthorization("Bearer j5jRToJdvHAAAAAAAABmwShwRVQJ3Fe8HIGqqAsqHFN9Uadp4WecU3WC2IBAva2Z"));
 	}
