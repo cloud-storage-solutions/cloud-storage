@@ -6,7 +6,7 @@
 	<groupId>org.cloud.storage.solutions</groupId>
 	<artifactId>cloud-storage</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
 	<name>cloud-storage</name>
 
@@ -69,4 +69,8 @@
 		</plugins>
 	</build>
 
+	<modules>
+		<module>cloud-worker</module>
+		<module>command-line-interface</module>
+	</modules>
 </project>
