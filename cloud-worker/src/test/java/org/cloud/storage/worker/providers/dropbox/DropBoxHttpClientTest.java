@@ -17,8 +17,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.cloud.storage.worker.commons.factories.RequestFactory;
-import org.cloud.storage.worker.commons.wrappers.HttpRequestWrapper;
-import org.cloud.storage.worker.commons.wrappers.HttpResponseWrapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +28,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 import com.google.api.client.http.FileContent;
 import com.google.api.client.http.HttpContent;
 import com.google.api.client.http.HttpHeaders;
+
+import http.wrappers.HttpRequestWrapper;
+import http.wrappers.HttpResponseWrapper;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DropBoxHttpClientTest {

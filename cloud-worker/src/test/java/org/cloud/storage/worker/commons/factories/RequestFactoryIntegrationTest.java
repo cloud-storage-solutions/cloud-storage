@@ -7,12 +7,13 @@ import static org.junit.Assert.assertThat;
 
 import java.io.File;
 
-import org.cloud.storage.worker.commons.wrappers.HttpRequestWrapper;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.google.api.client.http.FileContent;
 import com.google.api.client.http.GenericUrl;
+
+import http.wrappers.HttpRequestWrapper;
 
 public class RequestFactoryIntegrationTest {
 	private static final String URL = "https://url.com";

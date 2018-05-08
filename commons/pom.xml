@@ -8,13 +8,5 @@
 		<groupId>org.cloud.storage.solutions</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>cloud-worker</artifactId>
-	
-	<dependencies>
-		<dependency>
-			<groupId>org.cloud.storage.solutions</groupId>
-			<artifactId>commons</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
+	<artifactId>commons</artifactId>
 </project>

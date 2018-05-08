@@ -2,13 +2,13 @@ package org.cloud.storage.worker.commons.factories;
 
 import java.io.IOException;
 
-import org.cloud.storage.worker.commons.wrappers.HttpRequestWrapper;
-
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpContent;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.apache.ApacheHttpTransport;
+
+import http.wrappers.HttpRequestWrapper;
 
 public class RequestFactory {
 	private final HttpRequestFactory httpRequestFactory;

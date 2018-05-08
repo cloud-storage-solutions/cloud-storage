@@ -10,11 +10,12 @@ import java.io.File;
 import java.io.IOException;
 
 import org.cloud.storage.worker.commons.factories.RequestFactory;
-import org.cloud.storage.worker.commons.wrappers.HttpRequestWrapper;
-import org.cloud.storage.worker.commons.wrappers.HttpResponseWrapper;
 import org.cloud.storage.worker.providers.HttpClientCloudProvider;
 
 import com.google.api.client.http.FileContent;
+
+import http.wrappers.HttpRequestWrapper;
+import http.wrappers.HttpResponseWrapper;
 
 public class DropBoxHttpClient implements HttpClientCloudProvider {
 

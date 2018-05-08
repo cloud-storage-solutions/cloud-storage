@@ -1,6 +1,5 @@
-package org.cloud.storage.worker.commons.http;
+package http.wrappers;
 
-import org.cloud.storage.worker.commons.wrappers.HttpResponseWrapper;
 import org.junit.Test;
 
 import com.google.api.client.http.HttpResponse;

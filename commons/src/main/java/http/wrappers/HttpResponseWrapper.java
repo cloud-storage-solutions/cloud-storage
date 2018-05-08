@@ -1,4 +1,4 @@
-package org.cloud.storage.worker.commons.wrappers;
+package http.wrappers;
 
 import static org.springframework.util.Assert.notNull;
 
