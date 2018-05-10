@@ -7,7 +7,9 @@ import java.io.IOException;
 
 import org.cloud.storage.worker.commons.parsers.SpaceQuotaParser;
 import org.cloud.storage.worker.providers.HttpClientCloudProvider;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CloudProviderService {
 
 	private final HttpClientCloudProvider cloudProvider;

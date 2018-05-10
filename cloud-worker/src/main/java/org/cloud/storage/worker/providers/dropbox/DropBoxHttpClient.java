@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.cloud.storage.worker.providers.HttpClientCloudProvider;
+import org.springframework.stereotype.Component;
 
 import com.google.api.client.http.FileContent;
 
@@ -17,6 +18,7 @@ import http.factories.RequestFactoryFacade;
 import http.wrappers.HttpRequestWrapper;
 import http.wrappers.HttpResponseWrapper;
 
+@Component
 public class DropBoxHttpClient implements HttpClientCloudProvider {
 
 	private final RequestFactoryFacade requestFactory;
