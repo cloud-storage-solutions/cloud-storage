@@ -1,6 +1,6 @@
-package org.cloud.storage.worker.commons.factories;
+package http.factories;
 
-import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxHeaderConstants.APPLICATION_OCTET_STREAM;
+import static http.BasicHeaderConstants.APPLICATION_OCTET_STREAM;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
@@ -15,17 +15,17 @@ import com.google.api.client.http.GenericUrl;
 
 import http.wrappers.HttpRequestWrapper;
 
-public class RequestFactoryIntegrationTest {
+public class RequestFactoryFacadeIntegrationTest {
 	private static final String URL = "https://url.com";
 	private static final String FILE_NAME = "file-name";
 	private static final File FILE = new File(FILE_NAME);
 
-	private RequestFactory requestFactory;
+	private RequestFactoryFacade requestFactory;
 	private HttpRequestWrapper httpRequestWrapper;
 
 	@Before
 	public void setUp() {
-		requestFactory = new RequestFactory();
+		requestFactory = new RequestFactoryFacade();
 	}
 
 	@Test

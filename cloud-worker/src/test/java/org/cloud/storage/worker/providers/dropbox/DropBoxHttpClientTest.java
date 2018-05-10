@@ -1,7 +1,7 @@
 package org.cloud.storage.worker.providers.dropbox;
 
+import static http.BasicHeaderConstants.APPLICATION_OCTET_STREAM;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.SPACE_QUOTA_ENDPOINT;
-import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxHeaderConstants.APPLICATION_OCTET_STREAM;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxHeaderConstants.DROPBOX_API;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -16,7 +16,6 @@ import static org.mockito.Mockito.when;
 import java.io.File;
 import java.io.IOException;
 
-import org.cloud.storage.worker.commons.factories.RequestFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +28,7 @@ import com.google.api.client.http.FileContent;
 import com.google.api.client.http.HttpContent;
 import com.google.api.client.http.HttpHeaders;
 
+import http.factories.RequestFactoryFacade;
 import http.wrappers.HttpRequestWrapper;
 import http.wrappers.HttpResponseWrapper;
 
@@ -47,7 +47,7 @@ public class DropBoxHttpClientTest {
 	private DropBoxHttpClient dropBoxHttpClient;
 
 	@Mock
-	private RequestFactory requestFactoryMock;
+	private RequestFactoryFacade requestFactoryMock;
 
 	@Mock
 	private HttpRequestWrapper httpRequestWrapperMock;

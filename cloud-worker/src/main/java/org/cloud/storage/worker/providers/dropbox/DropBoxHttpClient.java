@@ -1,31 +1,31 @@
 package org.cloud.storage.worker.providers.dropbox;
 
+import static http.BasicHeaderConstants.APPLICATION_OCTET_STREAM;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.DOWNLOAD_ENDPOINT;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.SPACE_QUOTA_ENDPOINT;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.UPLOAD_ENDPOINT;
-import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxHeaderConstants.APPLICATION_OCTET_STREAM;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxHeaderConstants.DROPBOX_API;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.cloud.storage.worker.commons.factories.RequestFactory;
 import org.cloud.storage.worker.providers.HttpClientCloudProvider;
 
 import com.google.api.client.http.FileContent;
 
+import http.factories.RequestFactoryFacade;
 import http.wrappers.HttpRequestWrapper;
 import http.wrappers.HttpResponseWrapper;
 
 public class DropBoxHttpClient implements HttpClientCloudProvider {
 
-	private final RequestFactory requestFactory;
+	private final RequestFactoryFacade requestFactory;
 
 	public DropBoxHttpClient() {
-		requestFactory = new RequestFactory();
+		requestFactory = new RequestFactoryFacade();
 	}
 
-	DropBoxHttpClient(final RequestFactory requestFactory) {
+	DropBoxHttpClient(final RequestFactoryFacade requestFactory) {
 		this.requestFactory = requestFactory;
 	}
 
