@@ -4,7 +4,7 @@ import com.github.rvesse.airline.annotations.Command;
 import com.github.rvesse.airline.annotations.Option;
 
 @Command(name = "upload", description = "Upload a file")
-public class UploadCommand implements CommandRunnable {
+public class UploadCommand implements RunnableCommand {
 
 	@Option(name = { "-f", "--flag" }, description = "An option that requires no values")
 	private boolean flag = false;

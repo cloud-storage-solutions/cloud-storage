@@ -3,5 +3,5 @@ package org.cloud.storage.cli.execute;
 import com.github.rvesse.airline.Cli;
 
 public interface CommandExecutor {
-	<R extends CommandRunnable> void execute(final Cli<R> cli, final String... args);
+	<R extends RunnableCommand> void execute(final Cli<R> cli, final String... args);
 }
