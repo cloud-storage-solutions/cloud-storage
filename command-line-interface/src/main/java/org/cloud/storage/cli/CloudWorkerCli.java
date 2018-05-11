@@ -1,10 +1,10 @@
 package org.cloud.storage.cli;
 
 import org.cloud.storage.cli.commands.QuotaCommand;
+import org.cloud.storage.cli.commands.UploadCommand;
 import org.cloud.storage.cli.execute.CommandExecutor;
 import org.cloud.storage.cli.execute.CommandExecutorImpl;
 import org.cloud.storage.cli.execute.RunnableCommand;
-import org.cloud.storage.cli.execute.UploadCommand;
 
 import com.github.rvesse.airline.annotations.Cli;
 import com.github.rvesse.airline.annotations.Group;
