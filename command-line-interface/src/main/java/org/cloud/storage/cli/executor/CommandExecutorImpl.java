@@ -13,9 +13,9 @@ public class CommandExecutorImpl implements CommandExecutor {
 	private RunnableCommandExceptionsHandler runnableCommandExceptionsHandler;
 
 	@Override
-	public <R extends AbstractRunnableCommand> void execute(final Cli<R> cli, final String... args) {
-		Optional<? extends AbstractRunnableCommand> runnableCommandOptional = createRunnableCommandOptional(cli, args);
-		AbstractRunnableCommand runnableCommand = runnableCommandOptional.get();
+	public <R extends RunnableCommand> void execute(final Cli<R> cli, final String... args) {
+		Optional<? extends RunnableCommand> runnableCommandOptional = createRunnableCommandOptional(cli, args);
+		RunnableCommand runnableCommand = runnableCommandOptional.get();
 		try {
 			runnableCommand.run();
 		} catch (IOException ioException) {
@@ -23,7 +23,7 @@ public class CommandExecutorImpl implements CommandExecutor {
 		}
 	}
 
-	protected <R extends AbstractRunnableCommand> Optional<AbstractRunnableCommand> createRunnableCommandOptional(
+	protected <R extends RunnableCommand> Optional<RunnableCommand> createRunnableCommandOptional(
 			final Cli<R> cli, final String... args) {
 		return Optional.of(cli.parse(args));
 	}

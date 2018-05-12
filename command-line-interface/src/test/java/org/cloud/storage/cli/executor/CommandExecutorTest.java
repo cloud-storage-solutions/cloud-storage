@@ -25,12 +25,12 @@ public class CommandExecutorTest {
 	private CommandExecutorImpl commandExecutor;
 
 	@Mock
-	private Cli<? extends AbstractRunnableCommand> cli;
+	private Cli<? extends RunnableCommand> cli;
 
 	@Mock
-	private AbstractRunnableCommand runnableCommand;
+	private RunnableCommand runnableCommand;
 
-	private Optional<AbstractRunnableCommand> optionalRunnableCommand;
+	private Optional<RunnableCommand> optionalRunnableCommand;
 
 	@Before
 	public void setUp() {
