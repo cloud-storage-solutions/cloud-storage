@@ -2,7 +2,7 @@ package org.cloud.storage.cli.commands;
 
 import java.io.IOException;
 
-import org.cloud.storage.cli.execute.RunnableCommand;
+import org.cloud.storage.cli.executor.RunnableCommand;
 
 import com.github.rvesse.airline.annotations.Command;
 import com.github.rvesse.airline.annotations.Option;

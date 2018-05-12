@@ -1,4 +1,4 @@
-package org.cloud.storage.cli.execute;
+package org.cloud.storage.cli.executor;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import org.cloud.storage.cli.executor.CommandExecutorImpl;
+import org.cloud.storage.cli.executor.RunnableCommand;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

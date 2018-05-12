@@ -1,4 +1,4 @@
-package org.cloud.storage.cli.execute;
+package org.cloud.storage.cli.executor;
 
 import java.io.IOException;
 

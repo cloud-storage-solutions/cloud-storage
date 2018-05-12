@@ -5,7 +5,7 @@ import static http.constants.CloudWorkerRestApiConstants.QUOTA_PATH;
 
 import java.io.IOException;
 
-import org.cloud.storage.cli.execute.RunnableCommand;
+import org.cloud.storage.cli.executor.RunnableCommand;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 

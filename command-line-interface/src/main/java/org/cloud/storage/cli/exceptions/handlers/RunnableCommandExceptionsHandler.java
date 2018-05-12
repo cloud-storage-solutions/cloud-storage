@@ -1,4 +1,4 @@
-package org.cloud.storage.cli.exceptions.handler;
+package org.cloud.storage.cli.exceptions.handlers;
 
 import static java.lang.System.lineSeparator;
 
