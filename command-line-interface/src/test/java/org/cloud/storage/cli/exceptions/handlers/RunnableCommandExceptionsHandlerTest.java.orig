@@ -1,5 +1,14 @@
 package org.cloud.storage.cli.exceptions.handlers;
 
+<<<<<<< Updated upstream
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+
+public class RunnableCommandExceptionsHandlerTest {
+	private static final String EXCEPTION_MESSAGE = "exceptionMessage";
+
+=======
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -16,11 +25,21 @@ public class RunnableCommandExceptionsHandlerTest {
 	private static final String EXCEPTION_MESSAGE = "exceptionMessage";
 
 	@Spy
+>>>>>>> Stashed changes
 	private RunnableCommandExceptionsHandler runnableCommandExceptionsHandler;
 
 	@Mock
 	private Exception exception;
 
+<<<<<<< Updated upstream
+	@Test
+	public void test() {
+		runnableCommandExceptionsHandler = Mockito.spy(new RunnableCommandExceptionsHandler());
+
+		Mockito.doReturn(EXCEPTION_MESSAGE).when(exception).getMessage();
+		runnableCommandExceptionsHandler.handle(exception);
+		Mockito.verify(runnableCommandExceptionsHandler).logErrorMessage(EXCEPTION_MESSAGE);
+=======
 	@Mock
 	private Logger logger;
 
@@ -33,5 +52,6 @@ public class RunnableCommandExceptionsHandlerTest {
 
 		verify(runnableCommandExceptionsHandler).logErrorMessage(EXCEPTION_MESSAGE);
 		verify(logger).error(EXCEPTION_MESSAGE);
+>>>>>>> Stashed changes
 	}
 }
