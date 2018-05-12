@@ -1,6 +1,5 @@
 package org.cloud.storage.worker.providers.dropbox;
 
-import static http.BasicHeaderConstants.APPLICATION_OCTET_STREAM;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.SPACE_QUOTA_ENDPOINT;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxHeaderConstants.DROPBOX_API;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -12,6 +11,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.MediaType.APPLICATION_OCTET_STREAM_VALUE;
 
 import java.io.File;
 import java.io.IOException;
@@ -72,7 +72,7 @@ public class DropBoxHttpClientTest {
 
 		when(requestFactoryMock.createPostRequest(anyString(), any(HttpContent.class)))
 				.thenReturn(httpRequestWrapperMock);
-		doReturn(new FileContent(APPLICATION_OCTET_STREAM, FILE)).when(dropBoxHttpClient)
+		doReturn(new FileContent(APPLICATION_OCTET_STREAM_VALUE, FILE)).when(dropBoxHttpClient)
 				.createFileContent(fileArgumentCaptor.capture());
 	}
 

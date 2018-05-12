@@ -1,9 +1,9 @@
 package http.factories;
 
-import static http.BasicHeaderConstants.APPLICATION_OCTET_STREAM;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
+import static org.springframework.http.MediaType.APPLICATION_OCTET_STREAM_VALUE;
 
 import java.io.File;
 
@@ -37,12 +37,13 @@ public class RequestFactoryFacadeIntegrationTest {
 
 	@Test
 	public void testCreatePostRequestWithHttpContent() throws Exception {
-		httpRequestWrapper = requestFactory.createPostRequest(URL, new FileContent(APPLICATION_OCTET_STREAM, FILE));
+		httpRequestWrapper = requestFactory.createPostRequest(URL,
+				new FileContent(APPLICATION_OCTET_STREAM_VALUE, FILE));
 
 		final FileContent fileContent = (FileContent) httpRequestWrapper.getContent();
 
 		assertUrl(httpRequestWrapper.getUrl());
-		assertThat(fileContent.getType(), equalTo(APPLICATION_OCTET_STREAM));
+		assertThat(fileContent.getType(), equalTo(APPLICATION_OCTET_STREAM_VALUE));
 		assertThat(fileContent.getFile(), equalTo(FILE));
 	}
 

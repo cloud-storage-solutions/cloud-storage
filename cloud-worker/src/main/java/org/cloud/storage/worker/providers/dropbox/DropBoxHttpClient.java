@@ -1,10 +1,10 @@
 package org.cloud.storage.worker.providers.dropbox;
 
-import static http.BasicHeaderConstants.APPLICATION_OCTET_STREAM;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.DOWNLOAD_ENDPOINT;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.SPACE_QUOTA_ENDPOINT;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.UPLOAD_ENDPOINT;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxHeaderConstants.DROPBOX_API;
+import static org.springframework.http.MediaType.APPLICATION_OCTET_STREAM_VALUE;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,7 +63,7 @@ public class DropBoxHttpClient implements HttpClientCloudProvider {
 	}
 
 	protected FileContent createFileContent(final File file) {
-		return new FileContent(APPLICATION_OCTET_STREAM, file);
+		return new FileContent(APPLICATION_OCTET_STREAM_VALUE, file);
 	}
 
 	protected HttpResponseWrapper executeRequest(final HttpRequestWrapper httpRequestWrapper) throws IOException {
