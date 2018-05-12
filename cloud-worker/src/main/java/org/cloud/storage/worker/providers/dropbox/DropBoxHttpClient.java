@@ -9,6 +9,7 @@ import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxHeader
 import java.io.File;
 import java.io.IOException;
 
+import org.cloud.storage.worker.commons.factories.DropboxAuthorizedRequestFactoryFacade;
 import org.cloud.storage.worker.providers.HttpClientCloudProvider;
 import org.springframework.stereotype.Component;
 
@@ -24,10 +25,10 @@ public class DropBoxHttpClient implements HttpClientCloudProvider {
 	private final RequestFactoryFacade requestFactory;
 
 	public DropBoxHttpClient() {
-		requestFactory = new RequestFactoryFacade();
+		requestFactory = new DropboxAuthorizedRequestFactoryFacade();
 	}
 
-	DropBoxHttpClient(final RequestFactoryFacade requestFactory) {
+	protected DropBoxHttpClient(final RequestFactoryFacade requestFactory) {
 		this.requestFactory = requestFactory;
 	}
 
