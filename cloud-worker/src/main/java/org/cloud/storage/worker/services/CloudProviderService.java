@@ -21,7 +21,7 @@ public class CloudProviderService {
 	}
 
 	public String getSpaceQuota() throws IOException {
-		long spaceQuota = createSpaceQuotaParser().parseProviderSpaceQuoata(cloudProvider.getClass());
+		final long spaceQuota = createSpaceQuotaParser().parseProviderSpaceQuoata(cloudProvider.getClass());
 		return byteCountToDisplaySize(spaceQuota);
 	}
 

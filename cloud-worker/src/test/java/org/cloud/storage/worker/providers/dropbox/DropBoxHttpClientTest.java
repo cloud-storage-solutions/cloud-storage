@@ -8,7 +8,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_OCTET_STREAM_VALUE;
@@ -21,7 +20,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.google.api.client.http.FileContent;
@@ -44,6 +45,8 @@ public class DropBoxHttpClientTest {
 
 	private static final File FILE = new File(FILE_PATH);
 
+	@Spy
+	@InjectMocks
 	private DropBoxHttpClient dropBoxHttpClient;
 
 	@Mock
@@ -63,8 +66,6 @@ public class DropBoxHttpClientTest {
 
 	@Before
 	public void setup() throws Exception {
-		dropBoxHttpClient = spy(new DropBoxHttpClient(requestFactoryMock));
-
 		when(requestFactoryMock.createPostRequest(anyString())).thenReturn(httpRequestWrapperMock);
 		when(httpHeadesMock.set(anyString(), anyString())).thenReturn(httpHeadesMock);
 		when(httpRequestWrapperMock.getHeaders()).thenReturn(httpHeadesMock);

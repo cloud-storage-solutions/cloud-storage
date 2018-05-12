@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.util.Optional;
 
 import org.cloud.storage.cli.exceptions.handlers.RunnableCommandExceptionsHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.rvesse.airline.Cli;
 
 public class CommandExecutorImpl implements CommandExecutor {
+	@Autowired
 	private RunnableCommandExceptionsHandler runnableCommandExceptionsHandler;
 
 	@Override
@@ -21,8 +23,8 @@ public class CommandExecutorImpl implements CommandExecutor {
 		}
 	}
 
-	protected <R extends AbstractRunnableCommand> Optional<AbstractRunnableCommand> createRunnableCommandOptional(final Cli<R> cli,
-			final String... args) {
+	protected <R extends AbstractRunnableCommand> Optional<AbstractRunnableCommand> createRunnableCommandOptional(
+			final Cli<R> cli, final String... args) {
 		return Optional.of(cli.parse(args));
 	}
 }

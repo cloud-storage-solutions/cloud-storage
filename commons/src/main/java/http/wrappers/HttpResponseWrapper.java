@@ -1,6 +1,6 @@
 package http.wrappers;
 
-import static org.springframework.util.Assert.notNull;
+import static lombok.AccessLevel.PUBLIC;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,13 +14,13 @@ import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.HttpTransport;
 
-public class HttpResponseWrapper {
-	private final HttpResponse httpResponse;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
-	public HttpResponseWrapper(final HttpResponse httpResponse) {
-		notNull(httpResponse, "HttpResponse param is null");
-		this.httpResponse = httpResponse;
-	}
+@RequiredArgsConstructor(access = PUBLIC)
+public class HttpResponseWrapper {
+	@NonNull
+	private final HttpResponse httpResponse;
 
 	@Override
 	public int hashCode() {

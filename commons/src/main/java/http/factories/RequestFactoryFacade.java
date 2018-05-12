@@ -1,5 +1,7 @@
 package http.factories;
 
+import static lombok.AccessLevel.PROTECTED;
+
 import java.io.IOException;
 
 import com.google.api.client.http.GenericUrl;
@@ -8,16 +10,14 @@ import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.apache.ApacheHttpTransport;
 
 import http.wrappers.HttpRequestWrapper;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor(access = PROTECTED)
 public class RequestFactoryFacade {
 	private final HttpRequestFactory httpRequestFactory;
 
 	public RequestFactoryFacade() {
 		httpRequestFactory = new ApacheHttpTransport().createRequestFactory();
-	}
-
-	protected RequestFactoryFacade(final HttpRequestFactory httpRequestFactory) {
-		this.httpRequestFactory = httpRequestFactory;
 	}
 
 	public HttpRequestWrapper createGetRequest(final String url) throws IOException {

@@ -8,13 +8,11 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import org.cloud.storage.cli.executor.CommandExecutorImpl;
-import org.cloud.storage.cli.executor.AbstractRunnableCommand;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.github.rvesse.airline.Cli;
@@ -23,6 +21,7 @@ import com.github.rvesse.airline.Cli;
 public class CommandExecutorTest {
 	private static final String ARGS[] = { "arg1", "arg2", "arg3" };
 
+	@Spy
 	private CommandExecutorImpl commandExecutor;
 
 	@Mock
@@ -35,7 +34,6 @@ public class CommandExecutorTest {
 
 	@Before
 	public void setUp() {
-		commandExecutor = Mockito.spy(new CommandExecutorImpl());
 		optionalRunnableCommand = Optional.of(runnableCommand);
 	}
 

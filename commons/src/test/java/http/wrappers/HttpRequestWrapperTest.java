@@ -7,7 +7,7 @@ import com.google.api.client.http.HttpRequest;
 public class HttpRequestWrapperTest {
 	private HttpRequest httpRequest;
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void testCreateWrapperFromNullRequest() {
 		httpRequest = null;
 		new HttpRequestWrapper(httpRequest);

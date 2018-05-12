@@ -1,5 +1,6 @@
 package org.cloud.storage.worker.providers.dropbox;
 
+import static lombok.AccessLevel.PROTECTED;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.DOWNLOAD_ENDPOINT;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.SPACE_QUOTA_ENDPOINT;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.UPLOAD_ENDPOINT;
@@ -18,18 +19,16 @@ import com.google.api.client.http.FileContent;
 import http.factories.RequestFactoryFacade;
 import http.wrappers.HttpRequestWrapper;
 import http.wrappers.HttpResponseWrapper;
+import lombok.AllArgsConstructor;
 
 @Component
+@AllArgsConstructor(access = PROTECTED)
 public class DropBoxHttpClient implements HttpClientCloudProvider {
 
 	private final RequestFactoryFacade requestFactory;
 
 	public DropBoxHttpClient() {
 		requestFactory = new DropboxAuthorizedRequestFactoryFacade();
-	}
-
-	protected DropBoxHttpClient(final RequestFactoryFacade requestFactory) {
-		this.requestFactory = requestFactory;
 	}
 
 	/*

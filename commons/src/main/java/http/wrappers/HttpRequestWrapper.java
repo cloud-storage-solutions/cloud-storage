@@ -1,6 +1,6 @@
 package http.wrappers;
 
-import static org.springframework.util.Assert.notNull;
+import static lombok.AccessLevel.PUBLIC;
 
 import java.io.IOException;
 import java.util.concurrent.Executor;
@@ -21,14 +21,14 @@ import com.google.api.client.http.HttpUnsuccessfulResponseHandler;
 import com.google.api.client.util.ObjectParser;
 import com.google.api.client.util.Sleeper;
 
-@SuppressWarnings("deprecation")
-public class HttpRequestWrapper {
-	private final HttpRequest httpRequest;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
-	public HttpRequestWrapper(final HttpRequest httpRequest) {
-		notNull(httpRequest, "HttpRequest param is null");
-		this.httpRequest = httpRequest;
-	}
+@SuppressWarnings("deprecation")
+@RequiredArgsConstructor(access = PUBLIC)
+public class HttpRequestWrapper {
+	@NonNull
+	private final HttpRequest httpRequest;
 
 	@Override
 	public int hashCode() {
