@@ -4,6 +4,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -37,7 +38,7 @@ public class CommandExecutorTest {
 	}
 
 	@Test
-	public void testExecuteAndRunCommand() {
+	public void testExecuteAndRunCommand() throws IOException {
 		doReturn(optionalRunnableCommand).when(commandExecutor).createRunnableCommandOptional(cli, ARGS);
 
 		commandExecutor.execute(cli, ARGS);
