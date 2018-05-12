@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.cloud.storage.cli.executor.CommandExecutorImpl;
-import org.cloud.storage.cli.executor.RunnableCommand;
+import org.cloud.storage.cli.executor.AbstractRunnableCommand;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,12 +26,12 @@ public class CommandExecutorTest {
 	private CommandExecutorImpl commandExecutor;
 
 	@Mock
-	private Cli<? extends RunnableCommand> cli;
+	private Cli<? extends AbstractRunnableCommand> cli;
 
 	@Mock
-	private RunnableCommand runnableCommand;
+	private AbstractRunnableCommand runnableCommand;
 
-	private Optional<RunnableCommand> optionalRunnableCommand;
+	private Optional<AbstractRunnableCommand> optionalRunnableCommand;
 
 	@Before
 	public void setUp() {
