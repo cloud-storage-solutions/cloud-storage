@@ -9,6 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 public class RunnableCommandExceptionsHandler implements ExceptionHandler {
 	@Override
 	public void handle(final Exception exception) {
-		log.error(buildErrorMessage(exception));
+		logErrorMessage(exception.getMessage());
+	}
+
+	protected void logErrorMessage(final String errorMessage) {
+		log.error(errorMessage);
 	}
 }
