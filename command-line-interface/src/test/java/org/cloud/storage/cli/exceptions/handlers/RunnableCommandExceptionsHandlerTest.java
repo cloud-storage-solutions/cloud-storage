@@ -4,6 +4,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -24,11 +25,14 @@ public class RunnableCommandExceptionsHandlerTest {
 	@Mock
 	private Logger logger;
 
-	@Test
-	public void test() {
+	@Before
+	public void setUp() {
 		when(exception.getMessage()).thenReturn(EXCEPTION_MESSAGE);
 		doReturn(logger).when(runnableCommandExceptionsHandler).getLogger();
+	}
 
+	@Test
+	public void testHandle() {
 		runnableCommandExceptionsHandler.handle(exception);
 
 		verify(runnableCommandExceptionsHandler).logErrorMessage(EXCEPTION_MESSAGE);
