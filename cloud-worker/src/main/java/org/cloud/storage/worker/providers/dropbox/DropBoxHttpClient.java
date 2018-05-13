@@ -5,31 +5,28 @@ import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpoi
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.SPACE_QUOTA_ENDPOINT;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.UPLOAD_ENDPOINT;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxHeaderConstants.DROPBOX_API;
-import static org.springframework.http.MediaType.APPLICATION_OCTET_STREAM_VALUE;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.cloud.storage.worker.commons.factories.DropboxAuthorizedRequestFactoryFacade;
 import org.cloud.storage.worker.providers.HttpClientCloudProvider;
 import org.springframework.stereotype.Component;
 
-import com.google.api.client.http.FileContent;
-
+import http.factories.FileContentFactory;
 import http.factories.RequestFactoryFacade;
 import http.wrappers.HttpRequestWrapper;
 import http.wrappers.HttpResponseWrapper;
-import lombok.AllArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Component
-@AllArgsConstructor(access = PROTECTED)
+@RequiredArgsConstructor(access = PROTECTED)
 public class DropBoxHttpClient implements HttpClientCloudProvider {
-
+	@NonNull
 	private final RequestFactoryFacade requestFactory;
 
-	public DropBoxHttpClient() {
-		requestFactory = new DropboxAuthorizedRequestFactoryFacade();
-	}
+	@NonNull
+	private final FileContentFactory fileContentFactory;
 
 	/*
 	 * 
@@ -40,7 +37,7 @@ public class DropBoxHttpClient implements HttpClientCloudProvider {
 	@Override
 	public HttpResponseWrapper upload(final File file, final String destination) throws IOException {
 		final HttpRequestWrapper httpRequestWrapper = requestFactory.createPostRequest(UPLOAD_ENDPOINT,
-				createFileContent(file));
+				fileContentFactory.createFileContent(file));
 		httpRequestWrapper.getHeaders().set(DROPBOX_API,
 				"{\"path\": \"/" + destination + "\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}");
 		return executeRequest(httpRequestWrapper);
@@ -59,10 +56,6 @@ public class DropBoxHttpClient implements HttpClientCloudProvider {
 	public HttpResponseWrapper getSpaceQuota() throws IOException {
 		final HttpRequestWrapper httpRequestWrapper = requestFactory.createPostRequest(SPACE_QUOTA_ENDPOINT);
 		return executeRequest(httpRequestWrapper);
-	}
-
-	protected FileContent createFileContent(final File file) {
-		return new FileContent(APPLICATION_OCTET_STREAM_VALUE, file);
 	}
 
 	protected HttpResponseWrapper executeRequest(final HttpRequestWrapper httpRequestWrapper) throws IOException {

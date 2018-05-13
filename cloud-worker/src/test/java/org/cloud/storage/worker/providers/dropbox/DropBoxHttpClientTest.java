@@ -1,16 +1,15 @@
 package org.cloud.storage.worker.providers.dropbox;
 
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.SPACE_QUOTA_ENDPOINT;
+import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.UPLOAD_ENDPOINT;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxHeaderConstants.DROPBOX_API;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.http.MediaType.APPLICATION_OCTET_STREAM_VALUE;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,17 +17,15 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.google.api.client.http.FileContent;
-import com.google.api.client.http.HttpContent;
 import com.google.api.client.http.HttpHeaders;
 
+import http.factories.FileContentFactory;
 import http.factories.RequestFactoryFacade;
 import http.wrappers.HttpRequestWrapper;
 import http.wrappers.HttpResponseWrapper;
@@ -61,8 +58,10 @@ public class DropBoxHttpClientTest {
 	@Mock
 	private HttpHeaders httpHeadesMock;
 
-	@Captor
-	private ArgumentCaptor<File> fileArgumentCaptor;
+	@Mock
+	private FileContentFactory fileContentFactory;
+
+	private FileContent fileContent;
 
 	@Before
 	public void setup() throws Exception {
@@ -71,18 +70,17 @@ public class DropBoxHttpClientTest {
 		when(httpRequestWrapperMock.getHeaders()).thenReturn(httpHeadesMock);
 		doReturn(httpResponseWrapperMock).when(dropBoxHttpClient).executeRequest(httpRequestWrapperMock);
 
-		when(requestFactoryMock.createPostRequest(anyString(), any(HttpContent.class)))
+		when(fileContentFactory.createFileContent(FILE)).thenReturn(fileContent);
+		when(requestFactoryMock.createPostRequest(eq(UPLOAD_ENDPOINT), eq(fileContent)))
 				.thenReturn(httpRequestWrapperMock);
-		doReturn(new FileContent(APPLICATION_OCTET_STREAM_VALUE, FILE)).when(dropBoxHttpClient)
-				.createFileContent(fileArgumentCaptor.capture());
 	}
 
 	@Test
 	public void testUpload() throws Exception {
 		dropBoxHttpClient.upload(FILE, FILE_DESTINATION);
 
+		verify(fileContentFactory).createFileContent(FILE);
 		verify(httpHeadesMock).set(DROPBOX_API, UPLOAD_HEADER_VALUE);
-		assertThat(fileArgumentCaptor.getValue(), equalTo(FILE));
 	}
 
 	@Test(expected = IOException.class)
