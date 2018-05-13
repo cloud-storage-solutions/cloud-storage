@@ -1,6 +1,7 @@
 package org.cloud.storage.cli.factories;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.cloud.storage.cli.commands.configuration.CommandConfiguration;
@@ -32,6 +33,7 @@ public class DefaultUriComponentsBuilderFactoryTest {
 	@Before
 	public void setUp() {
 		doReturn(uriComponentsBuilder).when(defaultUriComponentsBuilderFactory).createUriComponentsBuilder();
+
 		when(commandConfiguration.getScheme()).thenReturn(HTTPS_SCHEME);
 		when(commandConfiguration.getHost()).thenReturn(HOST);
 		when(commandConfiguration.getPort()).thenReturn(PORT);
@@ -43,7 +45,11 @@ public class DefaultUriComponentsBuilderFactoryTest {
 
 	@Test
 	public void testCreateDefaultUriComponentsBuilder() {
-		System.out.println(defaultUriComponentsBuilderFactory.createDefaultUriComponentsBuilder().toUriString());
+		defaultUriComponentsBuilderFactory.createDefaultUriComponentsBuilder();
+
+		verify(uriComponentsBuilder).scheme(HTTPS_SCHEME);
+		verify(uriComponentsBuilder).host(HOST);
+		verify(uriComponentsBuilder).port(PORT);
 	}
 
 }

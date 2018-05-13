@@ -2,6 +2,7 @@ package org.cloud.storage.cli.commands;
 
 import static http.constants.CloudWorkerRestApiConstants.CLOUD_WORKER_REST_PATH;
 import static http.constants.CloudWorkerRestApiConstants.QUOTA_PATH;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -46,6 +47,7 @@ public class QuotaCommandTest {
 	@Before
 	public void setUp() throws Exception {
 		when(defaultUriComponentsBuilderFactory.createDefaultUriComponentsBuilder()).thenReturn(uriComponentsBuilder);
+		when(uriComponentsBuilder.pathSegment((any()))).thenReturn(uriComponentsBuilder);
 		when(uriComponentsBuilder.build()).thenReturn(uriComponents);
 		when(uriComponents.toUriString()).thenReturn(GET_URL);
 
