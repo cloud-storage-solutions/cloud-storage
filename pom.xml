@@ -90,7 +90,7 @@
 		<profile>
 			<id>it</id>
 			<modules>
-			<module>commons</module>
+				<module>commons</module>
 				<module>cloud-worker</module>
 				<module>integration-tests</module>
 			</modules>
