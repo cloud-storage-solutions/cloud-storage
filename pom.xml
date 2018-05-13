@@ -63,9 +63,38 @@
 		</dependency>
 	</dependencies>
 
-	<modules>
-		<module>cloud-worker</module>
-		<module>command-line-interface</module>
-		<module>commons</module>
-	</modules>
+	<profiles>
+		<profile>
+			<id>mainbuild</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>cloud-worker</module>
+				<module>command-line-interface</module>
+				<module>commons</module>
+			</modules>
+		</profile>
+
+
+		<profile>
+			<id>dev</id>
+			<modules>
+				<module>cloud-worker</module>
+				<module>command-line-interface</module>
+				<module>commons</module>
+				<module>integration-tests</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>it</id>
+			<modules>
+			<module>commons</module>
+				<module>cloud-worker</module>
+				<module>integration-tests</module>
+			</modules>
+		</profile>
+	</profiles>
+
 </project>

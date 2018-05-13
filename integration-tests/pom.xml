@@ -8,7 +8,7 @@
 		<groupId>org.cloud.storage.solutions</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>cloud-worker</artifactId>
+	<artifactId>integration-tests</artifactId>
 
 	<dependencies>
 		<dependency>
@@ -18,24 +18,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
+			<groupId>org.cloud.storage.solutions</groupId>
+			<artifactId>cloud-worker</artifactId>
+			<version>${version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.6</version>
-		</dependency>
-
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 </project>
