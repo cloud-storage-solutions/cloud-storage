@@ -1,32 +1,32 @@
 package org.cloud.storage.worker.providers.dropbox;
 
-import static lombok.AccessLevel.PROTECTED;
-import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.DOWNLOAD_ENDPOINT;
-import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.SPACE_QUOTA_ENDPOINT;
-import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.UPLOAD_ENDPOINT;
+import static org.cloud.storage.worker.commons.factories.DropboxAuthorizedRequestFactoryFacade.DROPBOX_AUTHORIZED_REQUEST_FACTORY_FACADE_QUALIFER;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxHeaderConstants.DROPBOX_API;
+import static org.cloud.storage.worker.providers.dropbox.constants.DropboxEndpointConstants.DOWNLOAD_ENDPOINT;
+import static org.cloud.storage.worker.providers.dropbox.constants.DropboxEndpointConstants.SPACE_QUOTA_ENDPOINT;
+import static org.cloud.storage.worker.providers.dropbox.constants.DropboxEndpointConstants.UPLOAD_ENDPOINT;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.cloud.storage.worker.providers.HttpClientCloudProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import http.factories.FileContentFactory;
 import http.factories.RequestFactoryFacade;
 import http.wrappers.HttpRequestWrapper;
 import http.wrappers.HttpResponseWrapper;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 @Component
-@RequiredArgsConstructor(access = PROTECTED)
 public class DropBoxHttpClient implements HttpClientCloudProvider {
-	@NonNull
-	private final RequestFactoryFacade requestFactory;
+	@Autowired
+	@Qualifier(DROPBOX_AUTHORIZED_REQUEST_FACTORY_FACADE_QUALIFER)
+	private RequestFactoryFacade requestFactory;
 
-	@NonNull
-	private final FileContentFactory fileContentFactory;
+	@Autowired
+	private FileContentFactory fileContentFactory;
 
 	/*
 	 * 

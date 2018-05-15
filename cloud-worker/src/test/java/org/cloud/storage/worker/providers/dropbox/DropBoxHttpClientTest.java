@@ -1,7 +1,7 @@
 package org.cloud.storage.worker.providers.dropbox;
 
-import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.SPACE_QUOTA_ENDPOINT;
-import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxEndpointConstants.UPLOAD_ENDPOINT;
+import static org.cloud.storage.worker.providers.dropbox.constants.DropboxEndpointConstants.SPACE_QUOTA_ENDPOINT;
+import static org.cloud.storage.worker.providers.dropbox.constants.DropboxEndpointConstants.UPLOAD_ENDPOINT;
 import static org.cloud.storage.worker.providers.dropbox.constants.DropBoxHeaderConstants.DROPBOX_API;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;

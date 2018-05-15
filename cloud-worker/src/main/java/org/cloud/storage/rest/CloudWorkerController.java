@@ -2,6 +2,7 @@ package org.cloud.storage.rest;
 
 import static http.constants.CloudWorkerRestApiConstants.CLOUD_WORKER_REST_PATH;
 import static http.constants.CloudWorkerRestApiConstants.QUOTA_PATH;
+import static http.constants.CloudWorkerRestApiConstants.UPLOAD_FILE_PATH;
 import static org.apache.commons.io.FileUtils.writeByteArrayToFile;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
@@ -34,7 +35,7 @@ public class CloudWorkerController {
 		return cloudProviderService.getSpaceQuota();
 	}
 
-	@PostMapping(path = QUOTA_PATH + "/{destination}", consumes = APPLICATION_OCTET_STREAM_VALUE)
+	@PostMapping(path = UPLOAD_FILE_PATH, consumes = APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseStatus(value = INTERNAL_SERVER_ERROR, reason = "Error while trying to upload a file")
 	@ExceptionHandler(IOException.class)
 	public void upload(@RequestBody MultipartFile multipartFile, @PathVariable("destination") String destination)

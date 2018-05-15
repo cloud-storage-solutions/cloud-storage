@@ -4,6 +4,8 @@ import static lombok.AccessLevel.PROTECTED;
 
 import java.io.IOException;
 
+import org.springframework.stereotype.Component;
+
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpContent;
 import com.google.api.client.http.HttpRequestFactory;
@@ -13,6 +15,7 @@ import http.wrappers.HttpRequestWrapper;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor(access = PROTECTED)
+@Component
 public class RequestFactoryFacade {
 	private final HttpRequestFactory httpRequestFactory;
 

@@ -1,12 +1,17 @@
 package org.cloud.storage.worker.commons.factories;
 
+import org.springframework.stereotype.Component;
+
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.apache.ApacheHttpTransport;
 
 import http.factories.RequestFactoryFacade;
 
+@Component(value = DropboxAuthorizedRequestFactoryFacade.DROPBOX_AUTHORIZED_REQUEST_FACTORY_FACADE_QUALIFER)
 public class DropboxAuthorizedRequestFactoryFacade extends RequestFactoryFacade {
+	public static final String DROPBOX_AUTHORIZED_REQUEST_FACTORY_FACADE_QUALIFER = "dropbox-authorized-request-factory-facade-qualifer";
+
 	public DropboxAuthorizedRequestFactoryFacade() {
 		super(createAuthorizedRequestFactory(new ApacheHttpTransport()));
 	}
