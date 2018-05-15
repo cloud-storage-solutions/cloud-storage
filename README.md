@@ -24,3 +24,7 @@ java 8
 
 ## license
 tbd
+
+## block diagram
+
+![Block-diagram](/docs/imgs/block-diagram.png)
