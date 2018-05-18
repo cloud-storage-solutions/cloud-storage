@@ -5,7 +5,7 @@ import static org.apache.commons.io.FileUtils.byteCountToDisplaySize;
 import java.io.File;
 import java.io.IOException;
 
-import org.cloud.storage.worker.commons.parsers.SpaceQuotaParser;
+import org.cloud.storage.worker.commons.parsers.SpaceQuotaJsonParser;
 import org.cloud.storage.worker.providers.HttpClientCloudProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +25,12 @@ public class CloudProviderService {
 		return byteCountToDisplaySize(spaceQuota);
 	}
 
-	protected SpaceQuotaParser createSpaceQuotaParser() throws IOException {
-		return new SpaceQuotaParser(cloudProvider.getSpaceQuota().parseAsString());
+	public void download(String filePath) throws IOException {
+		cloudProvider.download(filePath);
+	}
+
+	protected SpaceQuotaJsonParser createSpaceQuotaParser() throws IOException {
+		return new SpaceQuotaJsonParser(cloudProvider.getSpaceQuota().parseAsString());
 	}
 
 }

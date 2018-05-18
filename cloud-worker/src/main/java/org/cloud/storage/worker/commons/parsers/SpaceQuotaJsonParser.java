@@ -9,10 +9,10 @@ import org.cloud.storage.worker.providers.dropbox.DropBoxHttpClient;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-public class SpaceQuotaParser {
+public class SpaceQuotaJsonParser {
 	private final Map<Class<? extends HttpClientCloudProvider>, JsonElement> spaceQuotaParsers = new HashMap<>();
 
-	public SpaceQuotaParser(final String spaceQuota) {
+	public SpaceQuotaJsonParser(final String spaceQuota) {
 		final JsonElement dropBoxSpaceQuoataJsonElement = new JsonParser().parse(spaceQuota).getAsJsonObject()
 				.get("allocation").getAsJsonObject().get("allocated");
 		spaceQuotaParsers.put(DropBoxHttpClient.class, dropBoxSpaceQuoataJsonElement);

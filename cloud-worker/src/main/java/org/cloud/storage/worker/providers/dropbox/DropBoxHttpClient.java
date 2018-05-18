@@ -44,9 +44,9 @@ public class DropBoxHttpClient implements HttpClientCloudProvider {
 	}
 
 	@Override
-	public HttpResponseWrapper download(final String destination) throws IOException {
+	public HttpResponseWrapper download(final String filePath) throws IOException {
 		final HttpRequestWrapper httpRequestWrapper = requestFactory.createPostRequest(DOWNLOAD_ENDPOINT);
-		httpRequestWrapper.getHeaders().set(DROPBOX_API, "{\"path\": \"" + destination + "\"}");
+		httpRequestWrapper.getHeaders().set(DROPBOX_API, "{\"path\": \"/" + filePath + "}");
 		return executeRequest(httpRequestWrapper);
 	}
 

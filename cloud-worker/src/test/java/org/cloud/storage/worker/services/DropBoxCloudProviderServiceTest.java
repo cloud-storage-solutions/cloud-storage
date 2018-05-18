@@ -9,7 +9,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.File;
 
-import org.cloud.storage.worker.commons.parsers.SpaceQuotaParser;
+import org.cloud.storage.worker.commons.parsers.SpaceQuotaJsonParser;
 import org.cloud.storage.worker.providers.dropbox.DropBoxHttpClient;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class DropBoxCloudProviderServiceTest {
 	private DropBoxHttpClient dropBoxHttpClientMock;
 
 	@Mock
-	private SpaceQuotaParser spaceQuotaParserMock;
+	private SpaceQuotaJsonParser spaceQuotaParserMock;
 
 	@Before
 	public void setUp() throws Exception {
