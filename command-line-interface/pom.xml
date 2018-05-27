@@ -17,7 +17,7 @@
 			<artifactId>airline</artifactId>
 			<version>2.4.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.cloud.storage.solutions</groupId>
 			<artifactId>commons</artifactId>
@@ -29,4 +29,31 @@
 			<optional>true</optional>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>org.cloud.storage.cli.CloudWorkerCli</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id> 
+						<phase>package</phase> 
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
